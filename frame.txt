@@ -1,1 +1,21 @@
-ping txtc.cloud
+function Check-PrivilegeLevel {
+    $outputFilePath = "C:\Users\Public\PrivilegeLevelInfo.txt"
+
+    if ([Security.Principal.WindowsIdentity]::GetCurrent().Name -eq "NT AUTHORITY\SYSTEM") {
+        $privilegeLevel = "Current privilege level: SYSTEM"
+        Set-Content -Path $outputFilePath -Value $privilegeLevel
+        return
+    }
+
+    $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+
+    if ($isAdmin) {
+        $privilegeLevel = "Current privilege level: Administrator"
+    } else {
+        $privilegeLevel = "Current privilege level: User"
+    }
+
+    Set-Content -Path $outputFilePath -Value $privilegeLevel
+}
+
+Check-PrivilegeLevel
