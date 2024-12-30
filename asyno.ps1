@@ -1,5 +1,4 @@
 $ts = "$env:USERNAME"
-#$env:USERNAME
 $p = $MyInvocation.MyCommand.Path
 $env:USERNAME
 $env:USERPROFILE
