@@ -1,3 +1,4 @@
+powershell.exe -exec bypass
 
 $ts = "$env:USERNAME"
 $p = $MyInvocation.MyCommand.Path
